@@ -29,7 +29,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @RegisterForReflection
 public class ArtifactVersionEntity extends Entity {
 
-    public long globalId;
+    private long globalId;
     public String groupId;
     public String artifactId;
     public String version;
@@ -52,5 +52,13 @@ public class ArtifactVersionEntity extends Entity {
     public EntityType getEntityType() {
         return EntityType.ArtifactVersion;
     }
+
+	public long getGlobalId() {
+		return globalId;
+	}
+
+	public void setGlobalId(long globalId) {
+		this.globalId = globalId;
+	}
 
 }

@@ -313,7 +313,7 @@ public class KafkaSqlSink {
                     return sqlStore.deleteArtifact(key.getGroupId(), key.getArtifactId());
                 case IMPORT:
                     ArtifactVersionEntity entity = new ArtifactVersionEntity();
-                    entity.globalId = value.getGlobalId();
+                    entity.setGlobalId(value.getGlobalId());
                     entity.groupId = key.getGroupId();
                     entity.artifactId = key.getArtifactId();
                     entity.version = value.getVersion();

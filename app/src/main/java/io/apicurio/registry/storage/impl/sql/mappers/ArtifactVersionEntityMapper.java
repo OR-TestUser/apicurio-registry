@@ -44,7 +44,7 @@ public class ArtifactVersionEntityMapper implements RowMapper<ArtifactVersionEnt
     @Override
     public ArtifactVersionEntity map(ResultSet rs) throws SQLException {
         ArtifactVersionEntity entity = new ArtifactVersionEntity();
-        entity.globalId = rs.getLong("globalId");
+        entity.setGlobalId(rs.getLong("globalId"));
         entity.groupId = SqlUtil.denormalizeGroupId(rs.getString("groupId"));
         entity.artifactId = rs.getString("artifactId");
         entity.version = rs.getString("version");
@@ -57,7 +57,7 @@ public class ArtifactVersionEntityMapper implements RowMapper<ArtifactVersionEnt
         entity.labels = SqlUtil.deserializeLabels(rs.getString("labels"));
         entity.properties = SqlUtil.deserializeProperties(rs.getString("properties"));
         entity.contentId = rs.getLong("contentId");
-        entity.isLatest = entity.globalId == rs.getLong("latest");
+        entity.isLatest = entity.getGlobalId() == rs.getLong("latest");
         entity.artifactType = ArtifactType.fromValue(rs.getString("type"));
         return entity;
     }

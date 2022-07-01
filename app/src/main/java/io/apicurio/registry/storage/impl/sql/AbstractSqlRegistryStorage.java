@@ -2514,7 +2514,7 @@ public abstract class AbstractSqlRegistryStorage extends AbstractRegistryStorage
                 } else if (entity.getEntityType() == EntityType.ArtifactVersion) {
                     ArtifactVersionEntity artifactVersionEntity = (ArtifactVersionEntity) entity;
                     if (!preserveGlobalId) {
-                        artifactVersionEntity.globalId = -1;
+                        artifactVersionEntity.setGlobalId(-1);
                     }
                     if (!preserveContentId) {
                         if (!contentIdMapping.containsKey(artifactVersionEntity.contentId)) {
@@ -3089,8 +3089,8 @@ public abstract class AbstractSqlRegistryStorage extends AbstractRegistryStorage
 
         }
 
-        if (entity.globalId == -1 || !isGlobalIdExists(entity.globalId)) {
-            long globalId = nextGlobalIdIfInvalid(handle, entity.globalId);
+        if (entity.getGlobalId() == -1 || !isGlobalIdExists(entity.getGlobalId())) {
+            long globalId = nextGlobalIdIfInvalid(handle, entity.getGlobalId());
             try {
                 String sql = sqlStatements.importArtifactVersion();
                 handle.createUpdate(sql)
@@ -3117,7 +3117,7 @@ public abstract class AbstractSqlRegistryStorage extends AbstractRegistryStorage
                         String sqli = sqlStatements.insertLabel();
                         handle.createUpdate(sqli)
                                 .bind(0, tenantContext.tenantId())
-                                .bind(1, entity.globalId)
+                                .bind(1, entity.getGlobalId())
                                 .bind(2, label.toLowerCase())
                                 .execute();
                     });

@@ -1280,7 +1280,7 @@ public class KafkaSqlRegistryStorage extends AbstractRegistryStorage {
                 .properties(entity.properties)
                 .build();
         submitter.submitArtifact(tenantContext.tenantId(), entity.groupId, entity.artifactId, entity.version, ActionType.IMPORT,
-                entity.globalId, entity.artifactType, null, entity.createdBy, new Date(entity.createdOn), metaData, entity.versionId,
+                entity.getGlobalId(), entity.artifactType, null, entity.createdBy, new Date(entity.createdOn), metaData, entity.versionId,
                 entity.state, entity.contentId, entity.isLatest);
     }
     protected void importContent(ContentEntity entity) {
