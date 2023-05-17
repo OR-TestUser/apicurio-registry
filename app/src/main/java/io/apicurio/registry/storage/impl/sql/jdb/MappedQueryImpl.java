@@ -143,7 +143,13 @@ public class MappedQueryImpl<T> implements MappedQuery<T>, Closeable {
     public Optional<T> findLast() {
         Optional<T> rval = null;
         try {
-            while (this.resultSet.next()) {
+            
+			/* ********OpenRefactory Warning********
+			 Possible Object Assignment Non-determinism!
+			 Variable rval is assigned inside the loop and then used outside the loop.
+			 It may result in non-deterministic behavior since only the last assignment will be in effect.
+			*/
+			while (this.resultSet.next()) {
                 rval = Optional.of(this.mapper.map(resultSet));
             }
             if (rval == null) {
